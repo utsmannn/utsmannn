@@ -35,11 +35,11 @@ function versioning() {
   version_url="https://raw.githubusercontent.com/utsmannn/utsmannn/master/remote-versioning.txt"
   version_api=$(curl --header 'PRIVATE-TOKEN: bx_xHHKxFUGniHfrxsdr' $version_url 2>/dev/null)
   version_local=$(cat $HOME/.android-remote-build/remote-versioning.txt)
-
-  echo $version_api
 }
 
 function help() {
+  versioning
+
   echo "Remote Android Development"
   echo "v.$version_local"
   echo
@@ -64,7 +64,6 @@ function help() {
 
   is_scan_initial_run=1
   check_initial_run
-  versioning
 }
 
 gcloud_compute_path="$HOME/.android-remote-build/gcloud-compute.sh"
