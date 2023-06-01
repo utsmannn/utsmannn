@@ -269,7 +269,6 @@ function execute() {
 }
 
 function upload() {
-  echo "start uploading..."
   state="upload"
   start_spinner "> Remote: Sync remote from local"
   rsync -avz -q --delete --exclude-from ~/.android-remote-build/remote-exclude-list.txt -e "bash $gcloud_compute_path" "$CURRENT_DIR" $REMOTE_VM:~/remote 2>/dev/null
