@@ -30,6 +30,13 @@ is_launch=0
 
 is_scan_initial_run=0
 
+function versioning() {
+  version_url="https://raw.githubusercontent.com/utsmannn/utsmannn/master/remote-versioning.txt"
+  version_api=$(curl --header 'PRIVATE-TOKEN: bx_xHHKxFUGniHfrxsdr' $version_url)
+
+  echo $version_api
+}
+
 function help() {
   echo "Remote Android Development"
   echo
@@ -54,6 +61,7 @@ function help() {
 
   is_scan_initial_run=1
   check_initial_run
+  versioning
 }
 
 gcloud_compute_path="$HOME/.android-remote-build/gcloud-compute.sh"
