@@ -43,7 +43,7 @@ function versioning() {
 }
 
 function ask_update() {
-  read -p "Update available. Current version: $current_version, Update available version: $available_version, update now (y/n)?" choice
+  read -p "Update available. Current version: $current_version, Update available version: $available_version, update now (y/n)? " choice
 
   if [[ "$choice" == "y" ]]; then
     bash $HOME/.android-remote-build/remotesh-updater.sh
