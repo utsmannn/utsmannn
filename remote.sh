@@ -57,7 +57,8 @@ function ask_update() {
 }
 
 function help() {
-  echo "Remote Android Development v$current_version"
+  echo "Remotesh v$current_version"
+  echo "Android Remote Build"
   echo
   echo "Bash script for remote Android dev. Builds, installs, runs APKs"
   echo "from VM instance, improves perform. Useful tool for developers by reducing"
