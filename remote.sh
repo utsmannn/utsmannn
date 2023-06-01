@@ -10,7 +10,7 @@ APK_DIR=
 BUILD_TYPE="Debug"
 PACKAGE_NAME=
 
-version_local=
+current_version=
 spinner_pid=
 daemon_pid=
 remote_home=
@@ -33,15 +33,30 @@ is_scan_initial_run=0
 
 function versioning() {
   version_url="https://raw.githubusercontent.com/utsmannn/utsmannn/master/remote-versioning.txt"
-  version_api=$(curl --header 'PRIVATE-TOKEN: bx_xHHKxFUGniHfrxsdr' $version_url 2>/dev/null)
-  version_local=$(cat $HOME/.android-remote-build/remote-versioning.txt)
+
+  current_version=$(cat $HOME/.android-remote-build/remote-versioning.txt)
+  available_version=$(curl --header 'PRIVATE-TOKEN: bx_xHHKxFUGniHfrxsdr' $version_url 2>/dev/null)
+
+  current_major=$(echo "$current_version" | cut -d '.' -f 1)
+  current_minor=$(echo "$current_version" | cut -d '.' -f 2)
+  current_patch=$(echo "$current_version" | cut -d '.' -f 3)
+
+  available_major=$(echo "$available_version" | cut -d '.' -f 1)
+  available_minor=$(echo "$available_version" | cut -d '.' -f 2)
+  available_patch=$(echo "$available_version" | cut -d '.' -f 3)
+
+  if [[ $available_major -gt $current_major ]]; then
+    echo "Update available. Current version: $current_version, Update available version: $available_version"
+  elif [[ $available_minor -gt $current_minor ]]; then
+    echo "Update available. Current version: $current_version, Update available version: $available_version"
+  elif [[ $available_patch -gt $current_patch ]]; then
+    echo "Update available. Current version: $current_version, Update available version: $available_version"
+  fi
 }
 
 function help() {
-  versioning
-
   echo "Remote Android Development"
-  echo "v.$version_local"
+  echo "v.$current_version"
   echo
   echo "Bash script for remote Android dev. Builds, installs, runs APKs"
   echo "from VM instance, improves perform. Useful tool for developers by reducing"
@@ -90,6 +105,7 @@ function verify_android_project() {
 }
 
 function main() {
+  versioning
   if [ -z $1 ]; then
     help
     exit 1
