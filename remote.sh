@@ -36,8 +36,6 @@ function versioning() {
 
   current_version=$(cat $HOME/.android-remote-build/remote-versioning.txt)
   available_version=$(curl --header 'PRIVATE-TOKEN: bx_xHHKxFUGniHfrxsdr' $version_url 2>/dev/null)
-  
-  echo "current: $current_version | available: $available_version"
 
   current_major=$(echo "$current_version" | cut -d '.' -f 1)
   current_minor=$(echo "$current_version" | cut -d '.' -f 2)
@@ -57,8 +55,7 @@ function versioning() {
 }
 
 function help() {
-  echo "Remote Android Development"
-  echo "v.$current_version"
+  echo "Remote Android Development v$current_version"
   echo
   echo "Bash script for remote Android dev. Builds, installs, runs APKs"
   echo "from VM instance, improves perform. Useful tool for developers by reducing"
