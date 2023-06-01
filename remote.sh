@@ -46,16 +46,31 @@ function versioning() {
   available_patch=$(echo "$available_version" | cut -d '.' -f 3)
 
   if [[ $available_major -gt $current_major ]]; then
-    echo "Update available. Current version: $current_version, Update available version: $available_version"
+    ask_update "Update available. Current version: $current_version, Update available version: $available_version, update now (y/n)?"
   elif [[ $available_minor -gt $current_minor ]]; then
-    echo "Update available. Current version: $current_version, Update available version: $available_version"
+    ask_update "Update available. Current version: $current_version, Update available version: $available_version, update now (y/n)?"
   elif [[ $available_patch -gt $current_patch ]]; then
-    echo "Update available. Current version: $current_version, Update available version: $available_version"
+    ask_update "Update available. Current version: $current_version, Update available version: $available_version, update now (y/n)?"
+  fi
+}
+
+function ask_update() {
+  read -p $1 choice
+
+  if [[ "$choice" == "y" ]]; then
+    bash $HOME/.android-remote-build/remotesh-updater.sh
+    exit 1
+  elif [[ "$choice" == "n" ]]; then
+    echo "Run 'remotesh-updater' for update version"
+  else
+    echo "Option not valid"
+    exit 1
   fi
 }
 
 function help() {
-  echo "Remote Android Development v$current_version"
+  echo "Remote Android Development"
+  echo "v.$current_version"
   echo
   echo "Bash script for remote Android dev. Builds, installs, runs APKs"
   echo "from VM instance, improves perform. Useful tool for developers by reducing"
