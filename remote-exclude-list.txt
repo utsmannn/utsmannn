@@ -1,0 +1,8 @@
+.idea
+.git
+local.properties
+remote.sh
+remote-exclude-list.txt
+capture_top.sh
+cpu_usage.txt
+cpu_usage_data_2.txt
