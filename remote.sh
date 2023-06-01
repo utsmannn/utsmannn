@@ -56,7 +56,7 @@ function help() {
   check_initial_run
 }
 
-gcloud_compute_path="/Users/muhammadutsman/Development/android-remote-build/scripts/gcloud-compute.sh"
+gcloud_compute_path="$HOME/.android-remote-build/gcloud-compute.sh"
 
 function gcloud_ssh() {
   gcloud compute ssh $1 --zone asia-southeast2-a --internal-ip --command "$2"
