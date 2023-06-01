@@ -37,25 +37,13 @@ function versioning() {
   current_version=$(cat $HOME/.android-remote-build/remote-versioning.txt)
   available_version=$(curl --header 'PRIVATE-TOKEN: bx_xHHKxFUGniHfrxsdr' $version_url 2>/dev/null)
 
-  current_major=$(echo "$current_version" | cut -d '.' -f 1)
-  current_minor=$(echo "$current_version" | cut -d '.' -f 2)
-  current_patch=$(echo "$current_version" | cut -d '.' -f 3)
-
-  available_major=$(echo "$available_version" | cut -d '.' -f 1)
-  available_minor=$(echo "$available_version" | cut -d '.' -f 2)
-  available_patch=$(echo "$available_version" | cut -d '.' -f 3)
-
-  if [[ $available_major -gt $current_major ]]; then
-    ask_update "Update available. Current version: $current_version, Update available version: $available_version, update now (y/n)?"
-  elif [[ $available_minor -gt $current_minor ]]; then
-    ask_update "Update available. Current version: $current_version, Update available version: $available_version, update now (y/n)?"
-  elif [[ $available_patch -gt $current_patch ]]; then
-    ask_update "Update available. Current version: $current_version, Update available version: $available_version, update now (y/n)?"
+  if [[ $available_version != $current_version ]]; then
+    ask_update
   fi
 }
 
 function ask_update() {
-  read -p $1 choice
+  read -p "Update available. Current version: $current_version, Update available version: $available_version, update now (y/n)?" choice
 
   if [[ "$choice" == "y" ]]; then
     bash $HOME/.android-remote-build/remotesh-updater.sh
