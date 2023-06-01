@@ -36,6 +36,8 @@ function versioning() {
 
   current_version=$(cat $HOME/.android-remote-build/remote-versioning.txt)
   available_version=$(curl --header 'PRIVATE-TOKEN: bx_xHHKxFUGniHfrxsdr' $version_url 2>/dev/null)
+  
+  echo "current: $current_version | available: $available_version"
 
   current_major=$(echo "$current_version" | cut -d '.' -f 1)
   current_minor=$(echo "$current_version" | cut -d '.' -f 2)
