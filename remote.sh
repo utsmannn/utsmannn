@@ -32,7 +32,7 @@ is_scan_initial_run=0
 
 function versioning() {
   version_url="https://raw.githubusercontent.com/utsmannn/utsmannn/master/remote-versioning.txt"
-  version_api=$(curl --header 'PRIVATE-TOKEN: bx_xHHKxFUGniHfrxsdr' $version_url)
+  version_api=$(curl --header 'PRIVATE-TOKEN: bx_xHHKxFUGniHfrxsdr' $version_url 2>/dev/null)
 
   echo $version_api
 }
