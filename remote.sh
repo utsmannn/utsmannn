@@ -10,6 +10,7 @@ APK_DIR=
 BUILD_TYPE="Debug"
 PACKAGE_NAME=
 
+version_local=
 spinner_pid=
 daemon_pid=
 remote_home=
@@ -33,12 +34,14 @@ is_scan_initial_run=0
 function versioning() {
   version_url="https://raw.githubusercontent.com/utsmannn/utsmannn/master/remote-versioning.txt"
   version_api=$(curl --header 'PRIVATE-TOKEN: bx_xHHKxFUGniHfrxsdr' $version_url 2>/dev/null)
+  version_local=$(cat $HOME/.android-remote-build/remote-versioning.txt)
 
   echo $version_api
 }
 
 function help() {
   echo "Remote Android Development"
+  echo "v.$version_local"
   echo
   echo "Bash script for remote Android dev. Builds, installs, runs APKs"
   echo "from VM instance, improves perform. Useful tool for developers by reducing"
